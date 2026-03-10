@@ -78,7 +78,7 @@ export default function Hero() {
 
                 {/* Title */}
                 <h1
-                    className={`char-reveal ${animate ? 'animate' : ''} font-[var(--font-cormorant)] text-[2.8rem] md:text-[4.5rem] lg:text-[5.5rem] font-light leading-[1.05] text-white overflow-hidden mb-8`}
+                    className={`char-reveal ${animate ? 'animate' : ''} font-[var(--font-cormorant)] text-[clamp(2.5rem,10vw,5.5rem)] font-light leading-[1.05] text-white overflow-hidden mb-8`}
                 >
                     <SplitText>Complete Skin, Face</SplitText><br />
                     <SplitText startIdx={19}>& </SplitText>
@@ -92,7 +92,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 1.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className="text-[0.95rem] font-light leading-[1.9] text-white/70 max-w-md mb-10"
+                    className="text-[clamp(0.85rem,2.5vw,0.95rem)] font-light leading-[1.8] md:leading-[1.9] text-white/70 max-w-md mb-10"
                 >
                     At Dr. Gazaelle&apos;s Clinic, we specialize in acne care, glowing skin treatments,
                     hair restoration, and beauty enhancement procedures designed to bring out your natural confidence.
@@ -122,7 +122,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 2.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className="flex gap-10 mt-14 pt-6 border-t border-white/15"
+                    className="flex gap-6 md:gap-10 mt-14 pt-6 border-t border-white/15"
                 >
                     {[
                         { num: "4.8", suffix: "★", label: "Google Rating" },
@@ -131,13 +131,13 @@ export default function Hero() {
                     ].map((s, i) => (
                         <div key={i} className="relative">
                             <div
-                                className="font-[var(--font-cormorant)] text-[2.6rem] font-light text-white leading-none stat-counter"
+                                className="font-[var(--font-cormorant)] text-[2rem] md:text-[2.6rem] font-light text-white leading-none stat-counter"
                                 data-count={s.num}
                                 data-suffix={s.suffix}
                             >
                                 0{s.suffix}
                             </div>
-                            <div className="text-[0.68rem] tracking-[0.15em] uppercase text-white/50 mt-1">
+                            <div className="text-[0.6rem] md:text-[0.68rem] tracking-[0.15em] uppercase text-white/50 mt-1">
                                 {s.label}
                             </div>
                         </div>
@@ -146,11 +146,11 @@ export default function Hero() {
             </div>
 
             {/* Floating badge */}
-            <div className="absolute top-24 right-8 md:right-16 w-28 h-28 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 flex flex-col items-center justify-center z-20 opacity-0 animate-[fade-in_1s_2.4s_forwards,badge-float_3s_ease-in-out_infinite]">
-                <span className="font-[var(--font-cormorant)] text-[2.2rem] font-light text-white leading-none">
+            <div className="absolute top-[15%] right-6 md:right-16 w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-xl border border-white/15 flex flex-col items-center justify-center z-20 opacity-0 animate-[fade-in_1s_2.4s_forwards,badge-float_3s_ease-in-out_infinite] scale-90 md:scale-100">
+                <span className="font-[var(--font-cormorant)] text-[1.8rem] md:text-[2.2rem] font-light text-white leading-none">
                     4.8
                 </span>
-                <span className="text-[0.58rem] tracking-[0.15em] uppercase text-white/70 mt-0.5 text-center">
+                <span className="text-[0.5rem] md:text-[0.58rem] tracking-[0.15em] uppercase text-white/70 mt-0.5 text-center">
                     ⭐ Google<br />Rated
                 </span>
             </div>

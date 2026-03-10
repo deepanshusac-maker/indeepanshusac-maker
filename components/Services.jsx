@@ -86,7 +86,7 @@ export default function Services() {
                                             e.stopPropagation();
                                             openBookingModal(s.title);
                                         }}
-                                        className="bg-charcoal text-white text-[0.6rem] tracking-[0.2em] uppercase py-2 px-5 rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 hover:bg-rose-gold cursor-pointer"
+                                        className="bg-charcoal text-white text-[0.6rem] tracking-[0.2em] uppercase py-2 px-5 rounded-full opacity-100 translate-y-0 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 hover:bg-rose-gold cursor-pointer"
                                     >
                                         Book Now
                                     </button>

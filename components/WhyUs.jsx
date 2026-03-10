@@ -99,7 +99,7 @@ export default function WhyUs() {
                         {stats.map((s, i) => (
                             <motion.div
                                 key={i}
-                                className="group relative bg-[#241e1b] hover:bg-[#2a2320] transition-colors duration-500 p-10 flex flex-col justify-center items-center text-center overflow-hidden"
+                                className="group relative bg-[#241e1b] hover:bg-[#2a2320] transition-colors duration-500 p-6 md:p-10 flex flex-col justify-center items-center text-center overflow-hidden"
                                 variants={itemVariants}
                                 whileHover={{ scale: 1.02, zIndex: 10, backgroundColor: "#2d2522" }}
                                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -107,10 +107,10 @@ export default function WhyUs() {
                                 {/* Accent glow line inside box */}
                                 <span className="absolute left-0 bottom-0 w-full h-[2px] bg-gradient-to-r from-transparent via-rose-gold to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform translate-y-2 group-hover:translate-y-0" />
 
-                                <div className="font-[var(--font-cormorant)] text-[2.8rem] font-light text-cream mb-2 group-hover:text-rose-gold transition-colors duration-400">
+                                <div className="font-[var(--font-cormorant)] text-[2.2rem] md:text-[2.8rem] font-light text-cream mb-2 group-hover:text-rose-gold transition-colors duration-400">
                                     {s.num}
                                 </div>
-                                <div className="text-[0.65rem] tracking-[0.2em] uppercase text-cream/40 group-hover:text-cream/70 transition-colors duration-400">
+                                <div className="text-[0.55rem] md:text-[0.65rem] tracking-[0.15em] md:tracking-[0.2em] uppercase text-cream/40 group-hover:text-cream/70 transition-colors duration-400">
                                     {s.label}
                                 </div>
                             </motion.div>

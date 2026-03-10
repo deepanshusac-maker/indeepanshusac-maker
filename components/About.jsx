@@ -21,7 +21,7 @@ export default function About() {
     const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
     return (
-        <section id="about" ref={containerRef} className="relative py-24 md:py-32 px-8 md:px-16 max-w-[1400px] mx-auto overflow-hidden">
+        <section id="about" ref={containerRef} className="relative py-24 md:py-32 px-6 md:px-16 max-w-[1400px] mx-auto overflow-hidden">
             <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
                 {/* Left: Image with Parallax */}
                 <div className="w-full lg:w-1/2 relative">
@@ -52,7 +52,7 @@ export default function About() {
 
                         {/* Pill badge overlapping image */}
                         <motion.div
-                            className="absolute -bottom-6 -left-4 md:-left-8 bg-white border border-line py-3 px-6 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex items-center gap-4 z-20"
+                            className="absolute -bottom-6 left-4 md:-left-8 bg-white border border-line py-3 px-6 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex items-center gap-4 z-20 scale-90 md:scale-100"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
