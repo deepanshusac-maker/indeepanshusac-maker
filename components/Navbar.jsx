@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useBooking } from "@/context/BookingContext";
 
 export default function Navbar() {
+    const { openBookingModal } = useBooking();
     const [scrolled, setScrolled] = useState(false);
     const [active, setActive] = useState("");
     const [menuOpen, setMenuOpen] = useState(false);
@@ -51,14 +53,14 @@ export default function Navbar() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-between border-b border-line backdrop-blur-[18px] transition-all duration-400 ${scrolled
-                    ? "py-3 px-5 md:px-16 bg-cream/92 shadow-[0_4px_30px_rgba(0,0,0,0.06)]"
-                    : "py-4 px-5 md:px-16 bg-cream/70"
+                className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-between transition-all duration-500 ${scrolled
+                    ? "py-3 px-5 md:px-16 glass-navbar-dark shadow-[0_10px_40px_rgba(0,0,0,0.2)]"
+                    : "py-6 px-5 md:px-16 bg-transparent border-b border-white/10"
                     }`}
             >
                 <Link
                     href="#"
-                    className="font-[var(--font-cormorant)] text-[1.15rem] font-light tracking-wider text-charcoal no-underline leading-tight hover:opacity-80 transition-opacity"
+                    className="font-[var(--font-cormorant)] text-[1.2rem] font-medium tracking-widest text-white no-underline leading-tight hover:opacity-80 transition-opacity"
                 >
                     Dr. Gazaelle&apos;s
                     <span className="block text-[0.6rem] tracking-[0.22em] text-rose-gold font-[var(--font-jost)] font-light uppercase">
@@ -72,9 +74,9 @@ export default function Navbar() {
                         <li key={l.href}>
                             <Link
                                 href={l.href}
-                                className={`text-[0.72rem] tracking-[0.2em] uppercase no-underline font-normal transition-colors duration-300 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-px after:bg-rose-gold after:transition-all after:duration-400 ${active === l.href.replace("#", "")
+                                className={`text-[0.7rem] tracking-[0.25em] uppercase no-underline font-medium transition-colors duration-300 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-px after:bg-rose-gold after:transition-all after:duration-400 ${active === l.href.replace("#", "")
                                     ? "text-rose-gold after:w-full"
-                                    : "text-mid hover:text-rose-gold after:w-0 hover:after:w-full"
+                                    : "text-white/80 hover:text-rose-gold after:w-0 hover:after:w-full"
                                     }`}
                             >
                                 {l.label}
@@ -93,25 +95,25 @@ export default function Navbar() {
                         </span>
                         099279 65666
                     </Link>
-                    <Link
-                        href="#contact"
-                        className="hidden md:inline-block text-[0.7rem] tracking-[0.2em] uppercase py-2.5 px-6 border border-rose-gold text-rose-gold no-underline transition-all duration-400 relative overflow-hidden group"
+                    <button
+                        onClick={() => openBookingModal()}
+                        className="hidden md:inline-block text-[0.7rem] tracking-[0.2em] uppercase py-2.5 px-6 border border-rose-gold text-rose-gold no-underline transition-all duration-400 relative overflow-hidden group cursor-pointer"
                     >
                         <span className="absolute inset-0 bg-rose-gold transform scale-x-0 origin-right group-hover:scale-x-100 group-hover:origin-left transition-transform duration-400 -z-10" />
                         <span className="relative group-hover:text-white transition-colors duration-400">
                             Book Now
                         </span>
-                    </Link>
+                    </button>
 
                     {/* Hamburger button */}
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
-                        className="lg:hidden flex flex-col gap-[5px] p-2 cursor-pointer"
+                        className="lg:hidden flex flex-col gap-[6px] p-2 cursor-pointer"
                         aria-label="Toggle menu"
                     >
-                        <span className={`block w-6 h-[1.5px] bg-charcoal transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[6.5px]" : ""}`} />
-                        <span className={`block w-6 h-[1.5px] bg-charcoal transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`} />
-                        <span className={`block w-6 h-[1.5px] bg-charcoal transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`} />
+                        <span className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7.5px]" : ""}`} />
+                        <span className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`} />
+                        <span className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7.5px]" : ""}`} />
                     </button>
                 </div>
             </nav>
@@ -125,12 +127,12 @@ export default function Navbar() {
 
             {/* Mobile Drawer */}
             <div
-                className={`fixed top-0 right-0 bottom-0 w-[280px] bg-cream z-[101] shadow-[-8px_0_40px_rgba(0,0,0,0.1)] transition-transform duration-400 ease-[cubic-bezier(0.77,0,0.175,1)] lg:hidden flex flex-col ${menuOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 bottom-0 w-[280px] bg-charcoal z-[101] shadow-[-8px_0_40px_rgba(0,0,0,0.3)] transition-transform duration-400 ease-[cubic-bezier(0.77,0,0.175,1)] lg:hidden flex flex-col ${menuOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
                 {/* Close button */}
                 <div className="flex justify-end p-5">
-                    <button onClick={() => setMenuOpen(false)} className="w-10 h-10 flex items-center justify-center text-charcoal/60 hover:text-rose-gold transition-colors cursor-pointer">
+                    <button onClick={() => setMenuOpen(false)} className="w-10 h-10 flex items-center justify-center text-white/60 hover:text-rose-gold transition-colors cursor-pointer">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                         </svg>
@@ -144,9 +146,9 @@ export default function Navbar() {
                             key={l.href}
                             href={l.href}
                             onClick={() => setMenuOpen(false)}
-                            className={`text-[0.82rem] tracking-[0.2em] uppercase py-3 border-b border-line/50 no-underline font-light transition-all duration-300 ${active === l.href.replace("#", "")
+                            className={`text-[0.8rem] tracking-[0.25em] uppercase py-4 border-b border-white/5 no-underline font-light transition-all duration-300 ${active === l.href.replace("#", "")
                                 ? "text-rose-gold"
-                                : "text-charcoal/70 hover:text-rose-gold hover:pl-2"
+                                : "text-white/70 hover:text-rose-gold hover:pl-2"
                                 }`}
                             style={{ animationDelay: `${i * 0.05}s` }}
                         >
@@ -169,12 +171,15 @@ export default function Navbar() {
                         </svg>
                         WhatsApp Us
                     </a>
-                    <a
-                        href="tel:09927965666"
-                        className="flex items-center justify-center gap-2 mt-3 border border-rose-gold text-rose-gold py-3 rounded-full text-[0.78rem] font-medium tracking-wide hover:bg-rose-gold hover:text-white transition-all"
+                    <button
+                        onClick={() => {
+                            setMenuOpen(false);
+                            openBookingModal();
+                        }}
+                        className="flex items-center justify-center gap-2 mt-3 bg-rose-gold text-white py-3.5 rounded-full text-[0.78rem] font-semibold tracking-[0.2em] uppercase hover:bg-rose-deep transition-all shadow-lg cursor-pointer"
                     >
-                        📞 Call Now
-                    </a>
+                        ✨ Book Appointment
+                    </button>
                 </div>
             </div >
         </>

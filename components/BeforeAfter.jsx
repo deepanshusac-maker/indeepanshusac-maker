@@ -42,7 +42,7 @@ export default function BeforeAfter() {
     }
 
     return (
-        <section id="gallery" className="py-32 px-8 md:px-16 bg-warm-white">
+        <section id="gallery" className="relative py-32 px-8 md:px-16 bg-warm-white">
             <div className="max-w-[1200px] mx-auto">
                 {/* Header */}
                 <div className="text-center mb-20 reveal-up">

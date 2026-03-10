@@ -1,3 +1,5 @@
+import { BookingProvider } from "@/context/BookingContext";
+import BookingModal from "@/components/BookingModal";
 import "./globals.css";
 
 export const metadata = {
@@ -33,10 +35,13 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap"
           rel="stylesheet"
         />
-        <meta name="theme-color" content="#f9f5ef" />
+        <meta name="theme-color" content="#fcfbf7" />
       </head>
       <body className="font-[var(--font-jost)]">
-        {children}
+        <BookingProvider>
+          {children}
+          <BookingModal />
+        </BookingProvider>
       </body>
     </html>
   );

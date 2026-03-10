@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { useBooking } from "@/context/BookingContext";
 
 const serviceData = [
     { slug: "skin-brightening", icon: "✨", title: "Skin Brightening & Glow", desc: "Advanced facial treatments, HydraFacials, and vitamin infusions for a luminous, even-toned complexion." },
@@ -28,11 +29,12 @@ const cardVariants = {
 };
 
 export default function Services() {
+    const { openBookingModal } = useBooking();
     const ref = useRef(null);
     const inView = useInView(ref, { once: true, margin: "-80px" });
 
     return (
-        <section id="services" className="py-32 px-8 md:px-16 bg-cream">
+        <section id="services" className="relative py-24 md:py-32 px-6 md:px-16 lg:px-20 bg-cream">
             <div className="max-w-[1200px] mx-auto">
                 {/* Header */}
                 <div className="text-center mb-20 reveal-up">
@@ -74,9 +76,20 @@ export default function Services() {
                                     {s.desc}
                                 </p>
 
-                                <div className="relative z-10 text-[0.65rem] tracking-[0.2em] uppercase text-rose-gold flex items-center gap-2 mt-auto">
-                                    View Details
-                                    <span className="text-sm font-light inline-block group-hover:translate-x-1 transition-transform">→</span>
+                                <div className="relative z-10 flex items-center justify-between mt-auto pt-6 border-t border-charcoal/5 group-hover:border-rose-gold/20 transition-colors">
+                                    <div className="text-[0.65rem] tracking-[0.22em] uppercase text-mid/60 group-hover:text-rose-gold transition-colors">
+                                        View Details →
+                                    </div>
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            openBookingModal(s.title);
+                                        }}
+                                        className="bg-charcoal text-white text-[0.6rem] tracking-[0.2em] uppercase py-2 px-5 rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 hover:bg-rose-gold cursor-pointer"
+                                    >
+                                        Book Now
+                                    </button>
                                 </div>
 
                                 {/* Bottom line */}

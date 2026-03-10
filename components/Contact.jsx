@@ -32,7 +32,7 @@ export default function Contact() {
     }
 
     return (
-        <section id="contact" ref={ref} className="bg-gradient-to-b from-charcoal to-[#1a1815] text-cream scroll-mt-20 overflow-hidden">
+        <section id="contact" ref={ref} className="relative bg-gradient-to-b from-charcoal to-[#1a1815] text-cream scroll-mt-20 overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 px-8 md:px-16 py-24 md:py-32 max-w-[1400px] mx-auto">
                 {/* Left column */}
                 <motion.div
@@ -183,8 +183,8 @@ export default function Contact() {
                         whileHover={!submitted ? { scale: 1.02, y: -2 } : {}}
                         whileTap={!submitted ? { scale: 0.98 } : {}}
                         className={`w-full py-4 text-[0.72rem] tracking-[0.2em] uppercase font-medium transition-colors duration-500 relative overflow-hidden cursor-pointer rounded-sm ${submitted
-                                ? "bg-[#25D366] text-white cursor-default shadow-[0_4px_15px_rgba(37,211,102,0.3)]"
-                                : "bg-rose-gold text-white shadow-[0_4px_15px_rgba(200,149,108,0.3)] hover:shadow-[0_8px_25px_rgba(200,149,108,0.4)]"
+                            ? "bg-[#25D366] text-white cursor-default shadow-[0_4px_15px_rgba(37,211,102,0.3)]"
+                            : "bg-rose-gold text-white shadow-[0_4px_15px_rgba(200,149,108,0.3)] hover:shadow-[0_8px_25px_rgba(200,149,108,0.4)]"
                             }`}
                     >
                         {submitted ? "✓ Opening WhatsApp..." : "Send via WhatsApp →"}

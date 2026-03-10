@@ -3,8 +3,10 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useBooking } from "@/context/BookingContext";
 
 export default function About() {
+    const { openBookingModal } = useBooking();
     const containerRef = useRef(null);
     const textRef = useRef(null);
 
@@ -19,7 +21,7 @@ export default function About() {
     const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
     return (
-        <section id="about" ref={containerRef} className="py-24 md:py-32 px-8 md:px-16 max-w-[1400px] mx-auto overflow-hidden">
+        <section id="about" ref={containerRef} className="relative py-24 md:py-32 px-8 md:px-16 max-w-[1400px] mx-auto overflow-hidden">
             <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
                 {/* Left: Image with Parallax */}
                 <div className="w-full lg:w-1/2 relative">
@@ -138,17 +140,28 @@ export default function About() {
                         </ul>
                     </motion.div>
 
-                    {/* Signature */}
-                    <motion.div
-                        className="mt-12 pt-8 border-t border-line"
-                        initial={{ opacity: 0 }}
-                        animate={inView ? { opacity: 1 } : {}}
-                        transition={{ delay: 1, duration: 1 }}
-                    >
-                        <div className="font-[var(--font-cormorant)] text-3xl italic text-mid/40 transform -rotate-2 origin-left blur-[0.5px]">
-                            Dr. Gazaelle
-                        </div>
-                    </motion.div>
+                    {/* Signature & CTA */}
+                    <div className="mt-12 pt-8 border-t border-line flex flex-wrap items-center justify-between gap-8">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={inView ? { opacity: 1 } : {}}
+                            transition={{ delay: 1, duration: 1 }}
+                        >
+                            <div className="font-[var(--font-cormorant)] text-4xl italic text-mid/30 transform -rotate-2 origin-left blur-[0.3px]">
+                                Dr. Gazaelle
+                            </div>
+                        </motion.div>
+
+                        <motion.button
+                            onClick={() => openBookingModal()}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={inView ? { opacity: 1, x: 0 } : {}}
+                            transition={{ delay: 1.2, duration: 0.8 }}
+                            className="bg-rose-gold text-white text-[0.7rem] tracking-[0.2em] uppercase py-4 px-10 rounded-full hover:bg-rose-deep transition-all shadow-lg hover:shadow-rose-gold/20 cursor-pointer"
+                        >
+                            Book a Consultation
+                        </motion.button>
+                    </div>
                 </div>
             </div>
         </section>

@@ -11,8 +11,13 @@ export default function ClientAnimations() {
     useEffect(() => {
         // ─── PAGE LOADER ───
         const loader = loaderRef.current;
-        const timer = setTimeout(() => loader?.classList.add("loaded"), 2200);
-        const fallback = setTimeout(() => loader?.classList.add("loaded"), 3500);
+        const hideLoader = () => {
+            if (!loader) return;
+            loader.classList.add("loaded");
+            setTimeout(() => { if (loader) loader.style.display = "none"; }, 600);
+        };
+        const timer = setTimeout(hideLoader, 1600);
+        const fallback = setTimeout(hideLoader, 2500);
 
         return () => { clearTimeout(timer); clearTimeout(fallback); };
     }, []);
@@ -68,7 +73,7 @@ export default function ClientAnimations() {
             entries.forEach(e => {
                 if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
             });
-        }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+        }, { threshold: 0.05, rootMargin: "0px 0px 50px 0px" });
         els.forEach(el => obs.observe(el));
         return () => obs.disconnect();
     }, []);

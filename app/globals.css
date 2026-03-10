@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-cream: #fdfbf8;
+  --color-cream: #fcfbf7;
   --color-warm-white: #ffffff;
-  --color-rose-gold: #d4af37;
-  --color-rose-deep: #aa8529;
-  --color-blush: #f3efe6;
-  --color-blush-light: #faf7f2;
-  --color-charcoal: #111111;
-  --color-mid: #555555;
-  --color-gold: #c29b4b;
-  --color-line: rgba(212, 175, 55, 0.25);
+  --color-rose-gold: #c5a059;
+  --color-rose-deep: #8e6d3f;
+  --color-blush: #f7f2ef;
+  --color-blush-light: #faf7f5;
+  --color-charcoal: #0f1113;
+  --color-mid: #4a4f54;
+  --color-gold: #d4af37;
+  --color-line: rgba(197, 160, 89, 0.15);
 
   --font-cormorant: 'Cormorant Garamond', serif;
   --font-jost: 'Jost', sans-serif;
@@ -23,7 +23,7 @@
   --animate-badge-float: badge-float 3s ease-in-out infinite;
   --animate-morph: morph 12s ease-in-out infinite;
   --animate-dot-pulse: dot-pulse 2s ease-in-out infinite;
-  --animate-loader-fill: loader-fill 1.8s ease-in-out forwards;
+  --animate-loader-fill: loader-fill 1.6s ease-in-out forwards;
   --animate-ripple: ripple-effect 0.6s ease-out forwards;
   --animate-hero-mask: hero-mask 1.4s 0.3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
   --animate-line-grow: line-grow 0.6s 1.2s forwards;
@@ -258,9 +258,37 @@ body {
   font-family: var(--font-jost);
   background: var(--color-cream);
   color: var(--color-charcoal);
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* ─── GLASSMORPHISM ─── */
+.glass-navbar {
+  background: rgba(252, 251, 247, 0.65) !important;
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+}
+
+.glass-navbar-dark {
+  background: rgba(15, 17, 19, 0.82) !important;
+  backdrop-filter: blur(25px) saturate(160%);
+  -webkit-backdrop-filter: blur(25px) saturate(160%);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.glass-cta {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(15px) saturate(150%);
+  -webkit-backdrop-filter: blur(15px) saturate(150%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 160, 89, 0.1);
 }
 
 /* ─── CUSTOM CURSOR ─── */

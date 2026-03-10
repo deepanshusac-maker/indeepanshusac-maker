@@ -15,7 +15,7 @@ import ClientAnimations from "@/components/ClientAnimations";
 
 export default function Home() {
   return (
-    <main className="pb-14 md:pb-0">
+    <main className="pb-14 md:pb-0 w-full overflow-hidden">
       <ClientAnimations />
       <Navbar />
       <Hero />

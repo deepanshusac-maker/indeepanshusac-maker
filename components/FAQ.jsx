@@ -53,7 +53,7 @@ export default function FAQ() {
     }
 
     return (
-        <section id="faq" ref={ref} className="py-32 px-8 md:px-16 bg-warm-white">
+        <section id="faq" ref={ref} className="relative py-32 px-8 md:px-16 bg-warm-white">
             <div className="max-w-[800px] mx-auto">
                 {/* Header */}
                 <motion.div

@@ -1,53 +1,36 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useBooking } from "@/context/BookingContext";
 
 export default function Hero() {
-    const titleRef = useRef(null);
+    const { openBookingModal } = useBooking();
+    const [animate, setAnimate] = useState(false);
     const particlesRef = useRef(null);
 
     useEffect(() => {
-        // Character reveal animation using DOM TreeWalker
-        const el = titleRef.current;
-        if (!el) return;
-
+        // Trigger reveal after a short delay relative to hydration
         const timer = setTimeout(() => {
-            let idx = 0;
-            const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-            const textNodes = [];
-
-            while (walker.nextNode()) {
-                textNodes.push(walker.currentNode);
-            }
-
-            textNodes.forEach(node => {
-                const text = node.textContent;
-                const frag = document.createDocumentFragment();
-
-                for (const ch of text) {
-                    if (ch === ' ' || ch === '\n') {
-                        frag.appendChild(document.createTextNode(ch));
-                    } else {
-                        const span = document.createElement('span');
-                        span.className = 'char';
-                        span.style.transitionDelay = `${idx * 0.04}s`;
-                        span.textContent = ch;
-                        frag.appendChild(span);
-                        idx++;
-                    }
-                }
-
-                node.parentNode.replaceChild(frag, node);
-            });
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => el.classList.add("animate"));
-            });
-        }, 2200);
-
+            setAnimate(true);
+        }, 1700); // Aligned with loader fade-out (1600ms)
         return () => clearTimeout(timer);
     }, []);
+
+    // Helper to split text into spans with staggered delays
+    const SplitText = ({ children, startIdx = 0 }) => {
+        const text = children.toString();
+        return text.split('').map((char, i) => (
+            <span
+                key={i}
+                className="char"
+                style={{ transitionDelay: `${(startIdx + i) * 0.035}s` }}
+            >
+                {char === ' ' ? '\u00A0' : char}
+            </span>
+        ));
+    };
 
     useEffect(() => {
         // Floating particles
@@ -86,32 +69,44 @@ export default function Hero() {
             <div ref={particlesRef} className="absolute inset-0 pointer-events-none z-[1] overflow-hidden" />
 
             {/* Content */}
-            <div className="relative z-10 min-h-screen flex flex-col justify-center px-8 md:px-16 lg:px-20 pt-28 pb-16 max-w-4xl">
+            <div className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-16 lg:px-20 pt-20 md:pt-28 pb-16 max-w-4xl">
                 {/* Eyebrow */}
-                <div className="text-[0.72rem] tracking-[0.3em] uppercase text-rose-gold/90 font-light flex items-center gap-3 mb-8 opacity-0 animate-[fade-up_0.9s_0.6s_forwards]">
-                    <span className="w-0 h-px bg-rose-gold block animate-[line-grow_0.6s_1.2s_forwards]" />
+                <div className="text-[0.65rem] md:text-[0.72rem] tracking-[0.3em] uppercase text-rose-gold/90 font-light flex items-center gap-3 mb-6 md:mb-8 opacity-0 animate-[fade-up_0.9s_1.4s_forwards]">
+                    <span className="w-0 h-px bg-rose-gold block animate-[line-grow_0.6s_1.8s_forwards]" />
                     Aesthetic & Skin Clinic
                 </div>
 
                 {/* Title */}
                 <h1
-                    ref={titleRef}
-                    className="char-reveal font-[var(--font-cormorant)] text-[clamp(2.8rem,6vw,5rem)] font-light leading-[1.08] text-white mb-8"
+                    className={`char-reveal ${animate ? 'animate' : ''} font-[var(--font-cormorant)] text-[2.8rem] md:text-[4.5rem] lg:text-[5.5rem] font-light leading-[1.05] text-white overflow-hidden mb-8`}
                 >
-                    Complete Skin, Face<br />& <em className="italic text-rose-gold">Hair Care</em>
+                    <SplitText>Complete Skin, Face</SplitText><br />
+                    <SplitText startIdx={19}>& </SplitText>
+                    <em className="italic text-rose-gold">
+                        <SplitText startIdx={21}>Hair Care</SplitText>
+                    </em>
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-[0.95rem] font-light leading-[1.9] text-white/70 max-w-md mb-10 opacity-0 animate-[fade-up_0.9s_1s_forwards]">
+                <motion.p
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 1.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="text-[0.95rem] font-light leading-[1.9] text-white/70 max-w-md mb-10"
+                >
                     At Dr. Gazaelle&apos;s Clinic, we specialize in acne care, glowing skin treatments,
                     hair restoration, and beauty enhancement procedures designed to bring out your natural confidence.
-                </p>
+                </motion.p>
 
                 {/* CTA Button — pill shape like reference */}
-                <div className="opacity-0 animate-[fade-up_0.9s_1.2s_forwards]">
-                    <a
-                        href="#contact"
-                        className="group inline-flex items-center gap-3 bg-white text-charcoal py-4 px-8 rounded-full text-[0.82rem] font-medium tracking-wide hover:bg-rose-gold hover:text-white transition-all duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_40px_rgba(200,149,108,0.3)]"
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                    <button
+                        onClick={() => openBookingModal()}
+                        className="group inline-flex items-center gap-3 bg-white text-charcoal py-4 px-8 rounded-full text-[0.82rem] font-medium tracking-wide hover:bg-rose-gold hover:text-white transition-all duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_40px_rgba(200,149,108,0.3)] cursor-pointer"
                     >
                         Book An Appointment
                         <span className="w-9 h-9 rounded-full bg-charcoal text-white group-hover:bg-white group-hover:text-charcoal flex items-center justify-center transition-all duration-500">
@@ -119,11 +114,16 @@ export default function Hero() {
                                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </span>
-                    </a>
-                </div>
+                    </button>
+                </motion.div>
 
                 {/* Stats row */}
-                <div className="flex gap-10 mt-14 pt-6 border-t border-white/15 opacity-0 animate-[fade-up_0.9s_1.4s_forwards]">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 2.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="flex gap-10 mt-14 pt-6 border-t border-white/15"
+                >
                     {[
                         { num: "4.8", suffix: "★", label: "Google Rating" },
                         { num: "42", suffix: "+", label: "Reviews" },
@@ -142,11 +142,11 @@ export default function Hero() {
                             </div>
                         </div>
                     ))}
-                </div>
+                </motion.div>
             </div>
 
             {/* Floating badge */}
-            <div className="absolute top-24 right-8 md:right-16 w-28 h-28 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 flex flex-col items-center justify-center z-20 opacity-0 animate-[fade-in_1s_1.6s_forwards,badge-float_3s_ease-in-out_infinite]">
+            <div className="absolute top-24 right-8 md:right-16 w-28 h-28 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 flex flex-col items-center justify-center z-20 opacity-0 animate-[fade-in_1s_2.4s_forwards,badge-float_3s_ease-in-out_infinite]">
                 <span className="font-[var(--font-cormorant)] text-[2.2rem] font-light text-white leading-none">
                     4.8
                 </span>
@@ -156,7 +156,7 @@ export default function Hero() {
             </div>
 
             {/* Scroll indicator */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-0 animate-[fade-in_1s_2s_forwards]">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-0 animate-[fade-in_1s_2.8s_forwards]">
                 <div className="w-6 h-10 rounded-full border-2 border-white/30 flex justify-center pt-2">
                     <div className="w-1 h-2.5 rounded-full bg-white/60 animate-[scroll-dot_2s_ease-in-out_infinite]" />
                 </div>

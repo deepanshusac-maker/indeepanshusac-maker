@@ -51,7 +51,7 @@ export default function Testimonials() {
     const inView = useInView(ref, { once: true, margin: "-60px" });
 
     return (
-        <section id="reviews" className="py-32 px-8 md:px-16 bg-cream">
+        <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-20 bg-charcoal overflow-hidden group">
             <div className="max-w-[1200px] mx-auto">
                 {/* Header */}
                 <div className="text-center mb-20 reveal-up">
