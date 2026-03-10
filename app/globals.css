@@ -1,0 +1,434 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #fdfbf8;
+  --color-warm-white: #ffffff;
+  --color-rose-gold: #d4af37;
+  --color-rose-deep: #aa8529;
+  --color-blush: #f3efe6;
+  --color-blush-light: #faf7f2;
+  --color-charcoal: #111111;
+  --color-mid: #555555;
+  --color-gold: #c29b4b;
+  --color-line: rgba(212, 175, 55, 0.25);
+
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-jost: 'Jost', sans-serif;
+
+  --animate-fade-up: fade-up 0.9s ease forwards;
+  --animate-fade-in: fade-in 1s ease forwards;
+  --animate-hero-zoom: hero-zoom 2s 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-shimmer: shimmer 0.8s ease forwards;
+  --animate-badge-float: badge-float 3s ease-in-out infinite;
+  --animate-morph: morph 12s ease-in-out infinite;
+  --animate-dot-pulse: dot-pulse 2s ease-in-out infinite;
+  --animate-loader-fill: loader-fill 1.8s ease-in-out forwards;
+  --animate-ripple: ripple-effect 0.6s ease-out forwards;
+  --animate-hero-mask: hero-mask 1.4s 0.3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  --animate-line-grow: line-grow 0.6s 1.2s forwards;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-particle-float: particle-float linear infinite;
+  --animate-gradient-pulse: gradient-pulse 8s ease-in-out infinite;
+  --animate-divider-sweep: divider-sweep 3s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+
+    100% {
+      left: 120%;
+    }
+  }
+
+  @keyframes badge-float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes morph {
+
+    0%,
+    100% {
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+      border-radius: 58% 42% 64% 36% / 45% 60% 40% 55%;
+    }
+
+    50% {
+      border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+      transform: rotate(180deg) scale(1.1);
+    }
+
+    75% {
+      border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+    }
+  }
+
+  @keyframes dot-pulse {
+
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1.8);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes loader-fill {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes ripple-effect {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-mask {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes line-grow {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 36px;
+    }
+  }
+
+  @keyframes scroll-dot {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes glow-pulse {
+
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes particle-float {
+    0% {
+      opacity: 0;
+      transform: translateY(100vh) scale(0);
+    }
+
+    10% {
+      opacity: 0.3;
+    }
+
+    90% {
+      opacity: 0.3;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-100px) scale(1);
+    }
+  }
+
+  @keyframes gradient-pulse {
+
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.5;
+    }
+
+    50% {
+      transform: translate(3%, -3%) scale(1.05);
+      opacity: 1;
+    }
+  }
+
+  @keyframes divider-sweep {
+    0% {
+      left: -60%;
+    }
+
+    100% {
+      left: 100%;
+    }
+  }
+}
+
+::selection {
+  background: var(--color-rose-gold);
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-jost);
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.cursor-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-rose-gold);
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: multiply;
+}
+
+.cursor-dot.hovering {
+  width: 20px;
+  height: 20px;
+  background: var(--color-rose-deep);
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-rose-gold);
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.22s ease, opacity 0.2s, width 0.3s, height 0.3s;
+  opacity: 0.5;
+}
+
+.cursor-ring.hovering {
+  width: 50px;
+  height: 50px;
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* ─── SCROLL PROGRESS ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-rose-gold), var(--color-gold));
+  z-index: 10001;
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* ─── LOADER ─── */
+.loader-fill {
+  animation: var(--animate-loader-fill);
+}
+
+/* ─── SECTION DIVIDER ─── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-line);
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-rose-gold), transparent);
+  animation: var(--animate-divider-sweep);
+}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-rotate {
+  opacity: 0;
+  transform: translateY(40px) rotate(2deg);
+  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-up.visible,
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible,
+.reveal-rotate.visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+}
+
+/* ─── PARTICLES ─── */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  animation: var(--animate-particle-float);
+}
+
+/* ─── MARQUEE ─── */
+.marquee-track {
+  animation: var(--animate-marquee);
+}
+
+.marquee-section:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ─── RIPPLE ─── */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: var(--animate-ripple);
+  pointer-events: none;
+}
+
+/* ─── CHAR REVEAL ─── */
+.char-reveal .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px) rotateX(40deg);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: bottom center;
+}
+
+.char-reveal.animate .char {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
